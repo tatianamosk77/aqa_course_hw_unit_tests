@@ -4,3 +4,6 @@
 n + nn + nnn, где n не перемножаются, а конкатенируются
 
 */
+let number = 5
+console.log(number + +(number + '' + number) + +(number + '' + number + '' + number)) // 615
+
