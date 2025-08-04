@@ -18,4 +18,19 @@
  */
 let fizzBuzzResult = '';
 
-export { fizzBuzzResult };
+for(let i = 1; i <= 100; i++) {
+    
+    if(i % 3 === 0 && i % 5 === 0) {
+     fizzBuzzResult += `${i} - делится на 3 и на 5\n`
+    } else 
+        if(i % 3 === 0) {
+        fizzBuzzResult += `${i} - делится на 3\n`
+    } else 
+        if(i % 5 === 0) {
+        fizzBuzzResult += `${i} - делится на 5\n`
+    } else 
+        fizzBuzzResult += i +'\n';
+
+}
+
+// export { fizzBuzzResult };
