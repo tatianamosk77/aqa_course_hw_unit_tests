@@ -30,7 +30,9 @@ for(let i = 1; i <= 5; i++) {
    for(let j = 1; j <= i; j++) {
     smilePatternResult = smilePatternResult + ':)' 
    } 
+   if(i !== 5) {
    smilePatternResult += '\n'
+}
 }
 /**
  * Заменить все пробелы в переменной text на "1".
@@ -42,4 +44,4 @@ let replaceSpacesWithOneResult = '';
 
 replaceSpacesWithOneResult = text.replaceAll(' ', '1')
 
-//export { evenNumbersResult, smilePatternResult, replaceSpacesWithOneResult };
+export { evenNumbersResult, smilePatternResult, replaceSpacesWithOneResult };

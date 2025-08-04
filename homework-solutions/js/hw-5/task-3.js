@@ -7,4 +7,15 @@ const word = 'hello';
 
 let vowelsAndConsonantsResult = '';
 
+let massiveOfChars = word.split('')
+let vowels = 0;
+let consonants = 0;
+
+for(let i = 0; i < massiveOfChars.length; i++) {
+    if(/^[bcdfghjklmnpqrstvwxyz]$/i.test(massiveOfChars[i])) {
+        consonants++;
+    } else vowels++;
+}
+vowelsAndConsonantsResult = `${word} contains ${vowels} vowels and ${consonants} consonants`
+
 export { vowelsAndConsonantsResult };
