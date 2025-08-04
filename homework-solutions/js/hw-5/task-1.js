@@ -25,13 +25,13 @@ evenNumbersResult = str.slice(0, -1) // 10-8-6-4-2-0
  */
 
 let smilePatternResult = '';
-let tempStr = '';
 
 for(let i = 1; i <= 5; i++) {
-    tempStr = tempStr + ':)';
-    smilePatternResult = smilePatternResult + tempStr + '\n'
+   for(let j = 1; j <= i; j++) {
+    smilePatternResult = smilePatternResult + ':)' 
+   } 
+   smilePatternResult += '\n'
 }
-
 /**
  * Заменить все пробелы в переменной text на "1".
  * Переменная для результата `replaceSpacesWithOneResult` уже создана и содержит пустую строку.
@@ -41,7 +41,5 @@ const text = 'Hello! I am a JS student!';
 let replaceSpacesWithOneResult = '';
 
 replaceSpacesWithOneResult = text.replaceAll(' ', '1')
-
-console.log(replaceSpacesWithOneResult)
 
 //export { evenNumbersResult, smilePatternResult, replaceSpacesWithOneResult };
