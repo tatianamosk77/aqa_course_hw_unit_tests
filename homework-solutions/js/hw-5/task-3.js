@@ -7,7 +7,7 @@ const word = 'hello';
 
 let vowelsAndConsonantsResult = '';
 
-let massiveOfChars = word.split('')
+let massiveOfChars = word.toLocaleLowerCase().split('')
 let vowels = 0;
 let consonants = 0;
 
