@@ -48,8 +48,7 @@ let result = array2;
 */
 
 const array3 = [3, 11, 32, 7, 20];
-const [first, second, rest] = [array3[0], array3[1], array3.slice(2, array3.length)]
-
+const [first, second, ...rest] = array3;
 /*
 4. Конкатенация массивов
   - Создайте массив с числами [1,2,3,4,5]
