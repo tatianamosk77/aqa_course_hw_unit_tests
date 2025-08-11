@@ -59,12 +59,17 @@ function devideBy(sentence) {
     - Например fibonacci(8) //21
   */
 function fibonacci(n) {
-  if(n === 0) {
-    return 0
-  } else 
-  if(n === 1 ) {
-    return 1
-  } else return fibonacci(n - 1) + fibonacci(n - 2)
+  const arr = [0, 1]
+  
+  if(n === 0 || n === 1) {
+    return arr[n]
+  }  else
+  {
+    for(let i = 2; i <= n; i++) {
+      arr[i] = arr[i - 1] + arr[i - 2] 
+    }
+  
+  }
+    return arr[n]
 }
-
-export { mergeArrays, fibonacci, devideBy };
+ export { mergeArrays, fibonacci, devideBy };
