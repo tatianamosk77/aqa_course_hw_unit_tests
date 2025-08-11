@@ -10,6 +10,17 @@
 
 function digitalRoot(number) {
   // Ваш код
-}
+ 
+    const digits = String(number).split('')
+    let sum = 0
+    for(const el of digits) {
+      sum += Number(el, 0)
+    }
+     if(number > 9) {
+       return digitalRoot(sum)
+  } else {
+       return number
+    }
+  }
 
-export { digitalRoot };
+ export { digitalRoot };
