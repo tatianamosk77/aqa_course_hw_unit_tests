@@ -20,9 +20,7 @@ function isPalindrom(word) {
 
   string = reverse.toString().replaceAll(',', '')
 
-  if(string === word.toLowerCase()) {
-    return true
-  } else return false
+  return string === word.toLowerCase()
   
 }
 
