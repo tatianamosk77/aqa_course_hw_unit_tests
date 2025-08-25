@@ -15,22 +15,45 @@ const characters = [
 
 function addCharacter(character) {
   // Ваш код
+  if(Object.keys(character).length === 0 || Object.keys(character).length === 1) { 
+    throw new Error('Received invalid character!')
+
+  } else characters.push(character)
 }
 
 function getCharacter(name) {
   // Ваш код
+   return characters.find(el => el.name === name)
 }
 
 function getCharactersByAge(minAge) {
   // Ваш код
+  if(typeof minAge != 'number') {
+        throw new Error('Received invalid type of name!')
+  } else return characters.filter(el => el.age >= minAge)
 }
 
 function updateCharacter(name, newCharacter) {
   // Ваш код
+  const foundCharacter = getCharacter(name)
+
+  if(foundCharacter === undefined) {
+    throw new Error('The character wasn\'t found!')
+  }
+  foundCharacter.name = newCharacter.name ?? foundCharacter.name;
+  ....
+  foundCharacter.age = newCharacter.age
 }
 
 function removeCharacter(name) {
   // Ваш код
+  const index = characters.findIndex(el => el.name === name);
+
+  if (index === -1) {
+    throw new Error('Can\'t find the name');
+  }
+
+  characters.splice(index, 1);
 }
 
-export { characters, addCharacter, updateCharacter, getCharacter, getCharactersByAge, removeCharacter };
+ export { characters, addCharacter, updateCharacter, getCharacter, getCharactersByAge, removeCharacter };
