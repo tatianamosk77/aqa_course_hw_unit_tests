@@ -40,7 +40,8 @@ function updateCharacter(name, newCharacter) {
   if(foundCharacter === undefined) {
     throw new Error('The character wasn\'t found!')
   }
-  foundCharacter.name = newCharacter.name
+  foundCharacter.name = newCharacter.name ?? foundCharacter.name;
+  ....
   foundCharacter.age = newCharacter.age
 }
 
