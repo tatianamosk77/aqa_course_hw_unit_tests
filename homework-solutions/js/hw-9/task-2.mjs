@@ -47,9 +47,13 @@ function updateCharacter(name, newCharacter) {
 
 function removeCharacter(name) {
   // Ваш код
-  if(characters.findIndex(el => el.name === name) === -1) {
-    throw new Error('Can\'n find the name')
-  } else characters.splice(characters.findIndex(el => el.name === name), 1)
+  const index = characters.findIndex(el => el.name === name);
+
+  if (index === -1) {
+    throw new Error('Can\'t find the name');
+  }
+
+  characters.splice(index, 1);
 }
 
  export { characters, addCharacter, updateCharacter, getCharacter, getCharactersByAge, removeCharacter };
