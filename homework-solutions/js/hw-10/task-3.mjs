@@ -15,12 +15,29 @@
 
 */
 
+//import { use } from "react";
+
 function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.round(Math.random() * (max - min) + min);
 }
 
 function uniqueRandomGenerator(n) {
   // Ваш код
+  const usedNumbers = [];
+  let randomNumber;
+  return () => {
+    if (usedNumbers.length >= n) {
+      return 'All numbers were received';
+    } else {
+      do {
+        randomNumber = getRandomArbitrary(1, n);
+      } while (usedNumbers.includes(randomNumber));
+      {
+        usedNumbers.push(randomNumber);
+      }
+      return randomNumber;
+    }
+  };
 }
 
 export { uniqueRandomGenerator };
