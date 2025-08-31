@@ -119,9 +119,6 @@ class Company {
         isIncluded = true;
       }
     }
-
-    console.log(firstName, lastName);
-
     if (!(employee instanceof Employee) || isIncluded) {
       throw new Error();
     }
