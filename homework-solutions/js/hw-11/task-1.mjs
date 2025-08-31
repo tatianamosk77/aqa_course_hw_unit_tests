@@ -2,9 +2,9 @@ class Employee {
   // Ваш код
   #salary;
   constructor(firstName, lastName, profession, salary) {
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._profession = profession;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.profession = profession;
     this.#salary = salary;
   }
 
