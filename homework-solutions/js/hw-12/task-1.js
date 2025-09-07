@@ -80,3 +80,21 @@ async function handlePromiseAll() {
 }
 
 handlePromiseAll();
+
+async function handlePromiseAllSettled() {
+  try {
+    const results = await Promise.allSettled([promiseNumber(1), promiseNumber(2), promiseNumber(3)]);
+    console.log('Async Promise.allSettled results:');
+    results.forEach((result, index) => {
+      console.log(
+        `Promise ${index + 1}:`,
+        `Status: ${result.status},`,
+        result.status === 'fulfilled' ? `Value: ${result.value}` : `Reason: ${result.reason}`,
+      );
+    });
+  } catch (error) {
+    console.error('Error in Promise.allSettled:', error);
+  }
+}
+
+handlePromiseAllSettled();
