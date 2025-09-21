@@ -23,7 +23,7 @@ interface IVehicle {
 }
 
 abstract class Vehicle implements IVehicle {
-    constructor(public make: string, public model: string) {
+    constructor(protected make: string, protected model: string) {
     }
     start(): string {
         return `The vehicle ${this.make} ${this.model} is starting.`
