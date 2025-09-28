@@ -21,8 +21,24 @@ class Department implements IDepartment {
 
     }
     public getDepartmentInfoAboutEmployees(): string {
-        return `- ${this.name} (${this.employees_count} сотрудников)`;
+        const lastNumber = this.employees_count;
+
+        if (lastNumber === 0) {
+            return "(нет сотрудников)";
+        }
+        else if (lastNumber === 1) {
+            return `- ${this.name} (${lastNumber} - сотрудник)`;
+        }
+        else if (lastNumber >= 2 && lastNumber <= 4) {
+            return `- ${this.name} (${lastNumber} - сотрудника)`;
+        }
+        else {
+            return `- ${this.name} (${lastNumber} - сотрудников)`;
+        }
     }
+    //return `- ${this.name} (${this.employees_count} сотрудников)`;
+
+
 
     public getEmployeesCount(): number {
         return this.employees_count
@@ -33,19 +49,23 @@ class Department implements IDepartment {
 
 class Enterprise implements IEnterprise {
 
-    findDepartmentByIdOrName(value: number | string): boolean | undefined {
+    constructor(public id: number, public name: string, public departments: IDepartment[]) {
+
+    }
+    isDepartmentExist(value: number | string): boolean {
         if (typeof value === "number") {
-            const name = this.departments.some(el => el.id === value)
-            return name ? true : false
+            const isExist = this.departments.some(el => el.id === value)
+            return isExist;
         }
         if (typeof value === "string") {
-            const name = this.departments.some(el => el.name === value)
-            return name ? true : false
+            const isExist = this.departments.some(el => el.name === value)
+            return isExist;
         }
+        return false
 
     }
     getDepartmentsInfo(): string {
-        return this.departments.map(el => el.getDepartmentInfoAboutEmployees()).join('\n');
+        return this.departments.map(el => ` ${el.name} ` + el.getDepartmentInfoAboutEmployees()).join('\n');
 
     }
 
@@ -54,11 +74,21 @@ class Enterprise implements IEnterprise {
             acc + el.getEmployeesCount(), 0
         );
 
-        return total > 0 ? ` (${total} сотрудников)` : " (нет сотрудников)";
+        return total > 0 ? ` (${total} сотрудников)` : `(нет сотрудников)`;
     }
 
-    addDepartment(department: Department) {
-        this.departments.push(department)
+    addDepartment(newDepId: number, departmentName: string, employees_count: number) {
+        const newDep = new Department(newDepId, departmentName, employees_count)
+        this.departments.push(newDep)
+    }
+
+    editDepartmentName(depId: number, newName: string): boolean {
+        const department = this.findDepartment(depId);
+        if (department) {
+            department.name = newName;
+            return true;
+        }
+        return false;
     }
 
     findDepartment(idDep: number): Department | undefined {
@@ -69,7 +99,7 @@ class Enterprise implements IEnterprise {
 
     }
 
-    removeDepartment(depId: number): boolean {
+    removeDepartment(depId: number) {
         const index = this.departments.findIndex(dep => dep.id === depId);
         if (index > -1 && this.departments[index].employees_count == 0) {
             this.departments.splice(index, 1);
@@ -95,10 +125,6 @@ class Enterprise implements IEnterprise {
         return false
 
     }
-
-    constructor(public id: number, public name: string, public departments: IDepartment[]) {
-
-    }
 }
 
 class EnterpriseCollection {
@@ -119,7 +145,7 @@ class EnterpriseCollection {
 
     getEnterpriseNameByDep(value: number | string): string | undefined {
         for (const enterprise of this.enterprises) {
-            if (enterprise.findDepartmentByIdOrName(value)) {
+            if (enterprise.isDepartmentExist(value)) {
                 return enterprise.name
             }
         }
@@ -145,9 +171,7 @@ class EnterpriseCollection {
 
         const newDepId = this.generateId()
 
-        const newDepartment = new Department(newDepId, departmentName, employees_count)
-
-        enterprise.addDepartment(newDepartment)
+        enterprise.addDepartment(newDepId, departmentName, employees_count)
         return true
 
     }
@@ -168,14 +192,13 @@ class EnterpriseCollection {
 
     editDepartmentName(depId: number, newName: string): boolean {
         for (const enterprise of this.enterprises) {
-            const department = enterprise.findDepartment(depId);
-            if (department) {
-                department.name = newName;
+            if (enterprise.editDepartmentName(depId, newName)) {
                 return true;
             }
         }
         return false;
     }
+
     // 7. Написать функцию для удаления предприятия. В качестве аргумента принимает id предприятия.
 
     deleteEnterprise(entId: number): boolean {
@@ -247,8 +270,8 @@ enterprises.addEnterpriseIntoCollection("Предприятие 1")
 enterprises.addEnterpriseIntoCollection("Предприятие 2")
 enterprises.addEnterpriseIntoCollection("Предприятие 3")
 
-enterprises.addDepIntoEnterprise(1, "Отдел тестирования", 10)
-enterprises.addDepIntoEnterprise(1, "Отдел маркетинга", 20)
+enterprises.addDepIntoEnterprise(1, "Отдел тестирования", 2)
+enterprises.addDepIntoEnterprise(1, "Отдел маркетинга", 21)
 enterprises.addDepIntoEnterprise(1, "Администрация", 15)
 
 enterprises.addDepIntoEnterprise(2, "Отдел разработки", 50)
@@ -274,13 +297,16 @@ console.log(enterprises.getAllAboutCollection())
 enterprises.addDepIntoEnterprise(11, "Отдел мемов", 0)
 console.log(enterprises.getAllAboutCollection())
 
-// 5. Изменяет название предприятия. 
+console.log(enterprises.getEnterprise(3))
+
+// 5. Изменяет название предприятия.
 
 enterprises.editEnterpriseName(11, "Предприятие радости")
 console.log(enterprises.getAllAboutCollection())
 
 // 6. Изменяет название отдела
 enterprises.editDepartmentName(12, "Отдел бухгалтэрии")
+console.log(enterprises.getEnterprise(3))
 
 // 7. Удаляет предприятие
 enterprises.deleteEnterprise(11)
